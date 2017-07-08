@@ -15,7 +15,8 @@ public class Sudokusolver {
     public static void main(String[] args) {
      new Sudokusolver();
     }
-      private int []startingArray=new int[81];
+      private int []startingArray={1,7,0,0,4,0,0,0,0,3,0,0,1,0,2,9,0,7,0,9,4,7,0,8,6,5,0,0,0,0,0,0,6,0,0,5,0,1,9,0,0,0,8,3,0,8,0,0,3,0,0,0,0,0,0,6,7,8,0,4,2,1,0,5,0,1,2,0,9,0,0,8,0,0,0,0,1,0,0,7,9};
+      private int [] currentIterationArray=new int[81];
       private int possibleNums[]={1,2,3,4,5,6,7,8,9};
       boolean unsolved=true;
       int iterationNum=0;
@@ -27,6 +28,8 @@ public class Sudokusolver {
           }
           iterationNum++;
           System.out.println("Iteration #"+iterationNum+" complete.");
+          unsolved=checkSolved();
+          
           }
           
           System.out.println(iterationNum+" iterations of the guilty algorithm were required to solve the sudoku.");
@@ -161,15 +164,17 @@ public class Sudokusolver {
               if (indexH>80)
                   notAtHigh=false;
               else{
-                  if (possibleNums[startingArray[indexH]-1]!=0)
-                      possibleNums[startingArray[indexH]-1]=0;
+                  if (startingArray[indexH]!=0){                
+                      possibleNums[startingArray[indexH]-1]=0;              
+                  }
                   indexH+=9;
               }
               if (indexL<0)
                   notAtLow=false;
               else{
-                  if (possibleNums[startingArray[indexL]-1]!=0)
-                      possibleNums[startingArray[indexL]-1]=0;
+                  if (startingArray[indexL]!=0){
+                      possibleNums[startingArray[indexL]-1]=0;  
+                  }
                   indexL-=9;
               }                 
           }
@@ -183,17 +188,17 @@ public class Sudokusolver {
               if (((9-(index+1)%9)<(indexH-index)) || ((9-(index+1)%9)==9))
                   notAtHigh=false;
               else{
-                  
-                  if (possibleNums[startingArray[indexH]-1]!=0)
-                      possibleNums[startingArray[indexH]-1]=0;
+                  if (startingArray[indexH]!=0){                
+                      possibleNums[startingArray[indexH]-1]=0;              
+                  }
                   indexH++;
               }
               if (((index+1)%9)==(index-indexL))
                   notAtLow=false;
               else{ 
-                  
-                  if (possibleNums[startingArray[indexL]-1]!=0)
+                  if (startingArray[indexL]!=0){
                       possibleNums[startingArray[indexL]-1]=0;  
+                  }
                   indexL--;
               }                 
           }
@@ -224,6 +229,29 @@ public class Sudokusolver {
             return true;
           }
           else return false;
+      }
+      
+      private boolean checkSolved(){
+          int numFilled=0;
+             for (int i=0; i<startingArray.length; i++){
+                 if (startingArray[i]!=0)
+                      numFilled++;
+             }
+          return (numFilled==81 || deadEnd());
+      }
+      
+      private boolean deadEnd(){
+          if (iterationNum==1){
+              currentIterationArray=startingArray;
+              return false;
+          }
+          else if(startingArray==currentIterationArray){
+              return true;
+          }
+          else{
+              currentIterationArray=startingArray;
+              return false;
+          }
       }
       
       private void printSolution(){
