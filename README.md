@@ -17,6 +17,8 @@ To use the algorithm:
 *A GUI using the swing library will be made available in the future, greatly simplifying the use of the algorithm.*
 
 Screenshots are included below:
-
+1. Correct Input Processing
 ![alt text](https://raw.githubusercontent.com/ShreyasPrasad/Jsudokusolver/master/screenshots/ss1.PNG)
+
+2. Placement of Processed Input in Sudokusolver.java
 ![alt text](https://raw.githubusercontent.com/ShreyasPrasad/Jsudokusolver/master/screenshots/ss2.PNG)
