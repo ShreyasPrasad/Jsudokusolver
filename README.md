@@ -12,6 +12,7 @@ To use the algorithm:
 1. clone the project and use any Java IDE (i.e NetBeans/Eclipse) to open the file sudokusolver.java in the src/main folder. 
 2. write your sudoku in unsolved form in the following format: 0 replaces unknown numbers, and the numbers are ordered from left to right, separated by commas. 
 3. copy this entire list of numbers and paste it between the two curly brackets denoted by int [] startingArray.
+4. Hit run!
 
 *A GUI using the swing library will be made available in the future, greatly simplifying the use of the algorithm.*
 
