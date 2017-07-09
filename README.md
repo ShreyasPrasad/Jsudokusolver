@@ -18,5 +18,5 @@ To use the algorithm:
 
 Screenshots are included below:
 
-![alt text](https://raw.githubusercontent.com/ShreyasPrasad/Jsudokusolver/master/screenshots/ss1.png)
-![alt text](https://raw.githubusercontent.com/ShreyasPrasad/Jsudokusolver/master/screenshots/ss2.png)
+![alt text](https://raw.githubusercontent.com/ShreyasPrasad/Jsudokusolver/master/screenshots/ss1.PNG)
+![alt text](https://raw.githubusercontent.com/ShreyasPrasad/Jsudokusolver/master/screenshots/ss2.PNG)
