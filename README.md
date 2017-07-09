@@ -8,3 +8,13 @@ sudoku), that only a single number can occupy the square. Therefore, the algorit
 individually for numbers that be certainly filled in. Each sweep of 81 checks is known as an iteration. More than 1 iteration to solve the sudoku
 is required when the addition of numbers in one sweep leads to the discovery of other numbers in the next sweep and so forth. 
 
+To use the algorithm:
+1. clone the project and use any Java IDE (i.e NetBeans/Eclipse) to open the file sudokusolver.java in the src/main folder. 
+2. write your sudoku in unsolved form in the following format: 0 replaces unknown numbers, and the numbers are ordered from left to right, separated by commas. 
+3. copy this entire list of numbers and paste it between the two curly brackets denoted by int [] startingArray.
+
+*A GUI using the swing library will be made available in the future, greatly simplifying the use of the algorithm.*
+
+Screenshots are included below:
+
+![alt text](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
