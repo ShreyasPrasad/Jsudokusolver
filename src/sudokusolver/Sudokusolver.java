@@ -15,9 +15,9 @@ public class Sudokusolver {
     public static void main(String[] args) {
      new Sudokusolver();
     }
-      private int []startingArray={1,7,0,0,4,0,0,0,0,3,0,0,1,0,2,9,0,7,0,9,4,7,0,8,6,5,0,0,0,0,0,0,6,0,0,5,0,1,9,0,0,0,8,3,0,8,0,0,3,0,0,0,0,0,0,6,7,8,0,4,2,1,0,5,0,1,2,0,9,0,0,8,0,0,0,0,1,0,0,7,9};
+      private int []startingArray={0,1,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
       private int [] currentIterationArray=new int[81];
-      private int possibleNums[]={1,2,3,4,5,6,7,8,9};
+      private int [] possibleNums={1,2,3,4,5,6,7,8,9};
       boolean unsolved=true;
       int iterationNum=0;
       public Sudokusolver(){
@@ -25,6 +25,7 @@ public class Sudokusolver {
           for (int i=0; i<startingArray.length;i++){
               if (startingArray[i]==0)
                      checkPossibility(i);
+             
           }
           iterationNum++;
           System.out.println("Iteration #"+iterationNum+" complete.");
@@ -35,21 +36,30 @@ public class Sudokusolver {
           System.out.println(iterationNum+" iterations of the guilty algorithm were required to solve the sudoku.");
           System.out.println("The solved sudoku is: ");
           printSolution();
-         
+
       }
-      private void checkPossibility(int index){
-       //check all possible methods of possible number for given index      
-                  checkBox(index);
-                  if (!updateGrid(index))
-                     checkHorizontal(index);
-                  if (!updateGrid(index))
-                     checkVertical(index);
-                  if (!updateGrid(index))
-                     checkAdjacentLines(index);
-                  if (!updateGrid(index))
-                     checkHiddenTwin(index);
-                  
-        //evaluate if number can be DEFINITELY determined and if so, update grid                                 
+      private boolean checkPossibility(int index){
+       //check all possible methods of possible number for given index     
+          int orderOfMethods=0;
+          while (!updateGrid(index)){//evaluate if number can be DEFINITELY determined and if so, update grid 
+             if (orderOfMethods==1)
+                 checkBox(index);
+             else if (orderOfMethods==2)
+                  checkHorizontal(index);
+             else if (orderOfMethods==3)
+                 checkVertical(index);
+             else if (orderOfMethods==4)
+                 checkAdjacentLines(index); 
+             else 
+                  checkHiddenTwin(index);
+              
+              orderOfMethods++;
+              if (orderOfMethods==5){
+                  resetPossibleNums();
+                  break;
+              }
+          }
+          return true; 
       }
        //directions: 1=up,2=down,3=left,4=right,5=diagUpLeft, 6-diagUpRight, 7=diagBottomLeft, 8=diagBottomRight,9=Up2Left, 
        //10=Up2Right, 11=Down2Left, 12=Down2Right, 13=UpRight2,14=DownRight2,15=UpLeft2,16=DownLeft2
@@ -221,11 +231,9 @@ public class Sudokusolver {
                   numZeros++;
           }
           if (tempNum!=0&&numZeros==8){
-            startingArray[index]=tempNum;
-            //reinitialize array
-            for (int i=0; i<possibleNums.length;i++){
-                possibleNums[i]=(i+1);
-            }
+              System.out.println (tempNum+" "+ index);
+              startingArray[index]=tempNum;
+              resetPossibleNums();
             return true;
           }
           else return false;
@@ -252,6 +260,13 @@ public class Sudokusolver {
               currentIterationArray=startingArray;
               return false;
           }
+      }
+      
+      private void resetPossibleNums(){
+          //reinitialize array
+            for (int i=0; i<possibleNums.length;i++){
+                possibleNums[i]=(i+1);
+            }
       }
       
       private void printSolution(){
