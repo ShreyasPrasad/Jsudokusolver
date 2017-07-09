@@ -1,11 +1,11 @@
 /*
-//guilty
+//guilty algorithm
  */
 package sudokusolver;
 
 /**
  *
- * @author bala_
+ * @author Sheyas Krishna Prasad, July 8th 2017
  */
 public class Sudokusolver {
 
@@ -15,13 +15,13 @@ public class Sudokusolver {
     public static void main(String[] args) {
      new Sudokusolver();
     }
-      private int []startingArray={0,1,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+      private int []startingArray={7,0,9,0,5,0,8,0,4,0,0,3,0,0,8,0,0,0,0,0,0,0,1,0,2,0,3,9,8,0,6,0,0,0,2,0,4,0,0,9,0,7,0,0,8,0,7,0,0,0,5,0,4,9,6,0,1,0,3,0,0,0,0,0,0,0,8,0,0,4,0,0,8,0,4,0,9,0,1,0,7};
       private int [] currentIterationArray=new int[81];
       private int [] possibleNums={1,2,3,4,5,6,7,8,9};
-      boolean unsolved=true;
+      boolean unsolved=false;
       int iterationNum=0;
       public Sudokusolver(){
-          while (unsolved){
+          while (!unsolved){
           for (int i=0; i<startingArray.length;i++){
               if (startingArray[i]==0)
                      checkPossibility(i);
@@ -231,7 +231,6 @@ public class Sudokusolver {
                   numZeros++;
           }
           if (tempNum!=0&&numZeros==8){
-              System.out.println (tempNum+" "+ index);
               startingArray[index]=tempNum;
               resetPossibleNums();
             return true;
