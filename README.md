@@ -9,7 +9,7 @@ individually for numbers that be certainly filled in. Each sweep of 81 checks is
 is required when the addition of numbers in one sweep leads to the discovery of other numbers in the next sweep and so forth. 
 
 To use the algorithm:
-1. clone the project and use any Java IDE (i.e NetBeans/Eclipse) to open the file sudokusolver.java in the src/main folder. 
+1. clone the project and use any Java IDE (i.e NetBeans/Eclipse) to open the file Sudokusolver.java in the src folder of the repository. 
 2. write your sudoku in unsolved form in the following format: 0 replaces unknown numbers, and the numbers are ordered from left to right, separated by commas. 
 3. copy this entire list of numbers and paste it between the two curly brackets denoted by int [] startingArray.
 4. Hit run!
@@ -17,5 +17,8 @@ To use the algorithm:
 *A GUI using the swing library will be made available in the future, greatly simplifying the use of the algorithm.*
 
 Screenshots are included below:
+1. Correct Input Processing
+![alt text](https://raw.githubusercontent.com/ShreyasPrasad/Jsudokusolver/master/screenshots/ss1.PNG)
 
-![alt text](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
+2. Placement of Processed Input in Sudokusolver.java
+![alt text](https://raw.githubusercontent.com/ShreyasPrasad/Jsudokusolver/master/screenshots/ss2.PNG)
