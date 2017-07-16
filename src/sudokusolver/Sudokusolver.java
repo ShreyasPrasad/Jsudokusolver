@@ -14,7 +14,7 @@ public class Sudokusolver {
     public static void main(String[] args) {
         new Sudokusolver();
     }
-    private int[] startingArray = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};//FORMATTED SUDOKU GRID GOES HERE
+    private int[] startingArray = {0,0,5,7,6,0,2,0,4,0,0,2,0,9,5,8,0,1,1,6,9,0,0,8,0,3,0,9,1,0,0,5,2,0,7,0,0,0,0,1,0,4,9,2,6,2,4,7,0,0,9,0,5,0,6,2,8,9,0,0,0,0,5,0,5,0,2,8,0,3,0,9,3,0,0,5,1,0,6,8,0};//FORMATTED SUDOKU GRID GOES HERE
     private int[] currentIterationArray = new int[81];
     private int[] possibleNums = new int[9];
     private int[] trackEmptySquares = new int[8];
@@ -53,7 +53,7 @@ public class Sudokusolver {
         int orderOfMethods = 0;
         while (!updateGrid(index)) {//evaluate if number can be DEFINITELY determined and if so, update grid 
             if (orderOfMethods == 1) {
-                checkBox(index, true);
+                checkBox(index);
             } else if (orderOfMethods == 2) {
                 checkHorizontal(index, false, false);
             } else if (orderOfMethods == 3) {
@@ -63,7 +63,7 @@ public class Sudokusolver {
             }
 
             orderOfMethods++;
-            if (orderOfMethods == 4) {
+            if (orderOfMethods == 5) {
                 resetPossibleNums();
                 break;
             }
@@ -72,7 +72,7 @@ public class Sudokusolver {
     //directions: 1=up,2=down,3=left,4=right,5=diagUpLeft, 6-diagUpRight, 7=diagBottomLeft, 8=diagBottomRight,9=Up2Left, 
     //10=Up2Right, 11=Down2Left, 12=Down2Right, 13=UpRight2,14=DownRight2,15=UpLeft2,16=DownLeft2
 
-    private void checkBox(int index, boolean completeCall) {
+    private void checkBox(int index) {
         int row = (index / 9) + 1;
         int column = (index % 9) + 1;
 
@@ -250,9 +250,7 @@ public class Sudokusolver {
             }
         }
         //initiate call
-        if (completeCall) {
             callDetect(index, directions, checks);
-        }
     }
 
     void callDetect(int index, int[] directions, boolean[] checks) {
@@ -260,6 +258,7 @@ public class Sudokusolver {
         for (int i = 0; i < 8; i++) {
             int tempVal = detectNum(index, directions[i], checks[i]);
             if (tempVal != 0) {
+               // System.out.println(tempVal+" "+index+" "+i+" "+positionOfSquare);
                 possibleNums[tempVal - 1] = 0;
                 posSquares[positionOfSquare] = true;
             }
@@ -295,10 +294,10 @@ public class Sudokusolver {
                 boxCounter++;
                 return (startingArray[index + multiplier]);
             case 5:
-                positionOfSquare -= ((3 * multiplier) - multiplier);
+                positionOfSquare -= ((3 * multiplier) + multiplier);
                 return (startingArray[(index - (9 * multiplier)) - multiplier]);
             case 6:
-                positionOfSquare -= ((3 * multiplier) + multiplier);
+                positionOfSquare -= ((3 * multiplier) - multiplier);
                 return (startingArray[(index - (9 * multiplier)) + multiplier]);
             case 7:
                 positionOfSquare += ((3 * multiplier) - multiplier);
@@ -307,10 +306,10 @@ public class Sudokusolver {
                 positionOfSquare += ((3 * multiplier) + multiplier);
                 return (startingArray[(index + (9 * multiplier)) + multiplier]);
             case 9:
-                positionOfSquare -= ((3 * 2) - 1);
+                positionOfSquare -= ((3 * 2) + 1);
                 return (startingArray[(index - (9 * 2)) - 1]);
             case 10:
-                positionOfSquare -= ((3 * 2) + 1);
+                positionOfSquare -= ((3 * 2) - 1);
                 return (startingArray[(index - (9 * 2)) + 1]);
             case 11:
                 positionOfSquare += ((3 * 2) - 1);
@@ -319,16 +318,16 @@ public class Sudokusolver {
                 positionOfSquare += ((3 * 2) + 1);
                 return (startingArray[(index + (9 * 2)) + 1]);
             case 13:
-                positionOfSquare -= ((3 * 1) + 2);
+                positionOfSquare -= ((3 * 1) - 2);
                 return (startingArray[(index - (9 * 1)) + 2]);
             case 14:
-                positionOfSquare += ((3 * 1) + 2);
+                positionOfSquare += (3 * 1) + 2;
                 return (startingArray[(index + (9 * 1)) + 2]);
             case 15:
-                positionOfSquare -= ((3 * 1) - 2);
+                positionOfSquare -= (3 * 1) + 2;
                 return (startingArray[(index - (9 * 1)) - 2]);
             default:
-                positionOfSquare += ((3 * 1) - 2);
+                positionOfSquare += (3 * 1) - 2;
                 return (startingArray[(index + (9 * 1)) - 2]);
         }
     }
